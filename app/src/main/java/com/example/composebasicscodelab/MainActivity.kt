@@ -1,5 +1,6 @@
 package com.example.composebasicscodelab
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composebasicscodelab.ui.theme.ComposeBasicsCodelabTheme
@@ -59,7 +61,7 @@ fun Greeting(name: String) {
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy,
             stiffness = Spring.StiffnessLow
-            )
+        )
     )
 
 
@@ -74,7 +76,12 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding.value.coerceAtLeast(0.dp))
             ) {
                 Text(text = "Hello,")
-                Text(text = "$name!")
+                Text(
+                    text = "$name!",
+                    style = MaterialTheme.typography.h4.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                )
             }
             OutlinedButton(
                 onClick = { expanded.value = !expanded.value }
@@ -85,11 +92,21 @@ fun Greeting(name: String) {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    uiMode = UI_MODE_NIGHT_YES,
+    name = "DefaultDarkPreview"
+)
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    name = "DefalutPreview"
+)
 @Composable
 fun DefaultPreview() {
     ComposeBasicsCodelabTheme {
-        Greeting("Android")
+        Greetings()
     }
 }
 
@@ -112,7 +129,12 @@ fun OnboardingScreen(onContinueClicked: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true, widthDp = 320, heightDp = 320)
+
+@Preview(
+    showBackground = true,
+    widthDp = 320,
+    heightDp = 320
+)
 @Composable
 fun OnboardingPreview() {
     ComposeBasicsCodelabTheme {
